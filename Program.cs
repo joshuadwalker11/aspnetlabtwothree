@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using rp_ef_maria.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -10,6 +13,10 @@ var connString = builder.Configuration.GetConnectionString("StoreContext");
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<StoreContext>(options =>
     options.UseMySql(connString, dbmsVersion));
+
+builder.Services.AddTransient<IMessageService, EmailSender>();
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<StoreContext>();
 
 var app = builder.Build();
 

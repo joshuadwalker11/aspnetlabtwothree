@@ -7,14 +7,42 @@
 
 }
 
+<style>
+	#titlesearch {
+		border: 2px solid black;
+		padding: 2px;
+		margin: 2px;
+	}
+
+	#datesearch {
+		border: 2px solid black;
+		padding: 2px;
+		margin: 2px;
+	}
+</style>
+
 <h1>Index</h1>
-<div>
-	<h3>Filter</h3>
-	<form>
-		<p>Search Title: <input type="text" asp-for="Query" /></p>
+<form>
+	<div id="titlesearch">
+		<h3>Seach titles</h3>
+		<p>Search Titles: <input type="text" asp-for="Query" /></p>
 		<input type="submit" value="Search" />
-	</form>
-</div>
+	</div>
+
+	<div id="datesearch">
+		<h3>Search by date:</h3>
+		<p>Search By Date: <input type="date" asp-for="DateSearch" /></p>
+		<div>
+			<label for="dateselector">Before or after selected date:</label>
+			<select id="dateselector" asp-for="SelectRange">
+				<option value="before">Before (Inclusive)</option>
+				<option value="after">After (Exclusive)</option>
+			</select>
+		</div>
+		<p>Toggle Date Filter: On / Off <input type="checkbox" asp-for="FilterOn" /></p>
+		<input type="submit" value="Search" />
+	</div>
+</form>
 
 <p>
 	<a asp-page="Create">Create New</a>
